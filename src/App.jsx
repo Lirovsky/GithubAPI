@@ -1,8 +1,10 @@
-import { FaGithub, FaLink, FaTwitter } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
-import { BsFillGeoAltFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../components/Header";
+import Status from "../components/Status";
+import Footer from "../components/Footer";
 
 function App() {
   const [data, setData] = useState([]);
@@ -69,82 +71,24 @@ function App() {
         {data && !error ? (
           <div className="mt-5 flex items-start gap-x-5 rounded-lg bg-zinc-700 p-6">
             <div className="w-full">
-              <div className="flex gap-5">
-                <img
-                  src={data.avatar_url}
-                  alt={data.name}
-                  className="w-20 rounded-full border-2"
-                />
-                <div className="w-full items-start justify-between lg:flex">
-                  <div>
-                    <h1 className="text-xl text-white">{data.name}</h1>
-                    <p className="my-1 font-bold text-blue-500">{data.login}</p>
-                  </div>
-                  <div>
-                    <p className="text-slate-300">
-                      Entrou {new Date(data.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <p className="my-4 text-slate-300">{data.bio}</p>
-
-              <div className="rounded-lg bg-zinc-800">
-                <div className="flex justify-between px-4 py-3">
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm text-slate-300">Seguidores</p>
-                    <p className="text-2xl text-white">{data.followers}</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm text-slate-300">Seguindo</p>
-                    <p className="text-2xl text-white">{data.following}</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm text-slate-300">Repositórios</p>
-                    <p className="text-2xl text-white">{data.public_repos}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 rounded-lg p-4 text-slate-300 sm:grid-cols-2">
-                <div>
-                  <p className="mb-2 flex items-center gap-2">
-                    <BsFillGeoAltFill className="text-red-500" />
-                    {data.location ? (
-                      data.location
-                    ) : (
-                      <p className="text-gray-400">Não informado</p>
-                    )}
-                  </p>
-                  <p className="mb-2 flex items-center gap-2">
-                    <FaLink className="text-green-400" />
-                    {data.blog ? (
-                      <a href={data.blog} target="blank">
-                        Blog
-                      </a>
-                    ) : (
-                      <p className="text-gray-400">Não informado</p>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="mb-2 flex items-center gap-2">
-                    <FaTwitter className="text-blue-500" />
-                    {data.twitter_username ? (
-                      data.twitter_username
-                    ) : (
-                      <p className="text-gray-400">Não informado</p>
-                    )}
-                  </p>
-
-                  <a
-                    href={data.html_url}
-                    target="_blank"
-                    className="mb-2 flex items-center gap-2"
-                  >
-                    <FaGithub className="text-white" /> GitHub
-                  </a>
-                </div>
-              </div>
+              <Header
+                avatar={data.avatar_url}
+                name={data.name}
+                login={data.login}
+                created={data.created_at}
+                bio={data.bio}
+              />
+              <Status
+                followers={data.followers}
+                following={data.following}
+                repos={data.public_repos}
+              />
+              <Footer
+                location={data.location}
+                blog={data.blog}
+                twitter={data.twitter_username}
+                link={data.html_url}
+              />
             </div>
           </div>
         ) : null}
