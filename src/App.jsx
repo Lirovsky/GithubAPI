@@ -2,9 +2,9 @@ import { FaGithub } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../components/Header";
-import Status from "../components/Status";
-import Footer from "../components/Footer";
+import Header from "./components/Header";
+import Status from "./components/Status";
+import Footer from "./components/Footer";
 
 function App() {
   const [data, setData] = useState([]);

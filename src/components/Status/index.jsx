@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import Stat from "./components";
+import Stat from "./components/Stat";
 
 export default function Status({ followers, following, repos }) {
   return (
